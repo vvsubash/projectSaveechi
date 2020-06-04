@@ -10,6 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "prettify": "npx prettier --write \"**/*.{vue,js}\"",
     "test": "jest"
   },
   "lint-staged": {
