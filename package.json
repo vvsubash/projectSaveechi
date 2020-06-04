@@ -1,6 +1,6 @@
 {
   "name": "projectSaveechi",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "My majestic Nuxt.js project",
   "author": "venkat",
   "private": true,
@@ -11,6 +11,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "prettify": "npx prettier --write \"**/*.{vue,js}\"",
+    "release": "standard-version",
     "test": "jest"
   },
   "lint-staged": {
