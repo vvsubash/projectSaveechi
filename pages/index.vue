@@ -19,6 +19,8 @@
         >
           GitHub
         </a>
+        <!-- TODO need to refactor -->
+        <button @click="signIn">Login</button>
       </div>
     </div>
   </div>
@@ -30,6 +32,11 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  methods: {
+    signIn() {
+      this.$store.dispatch('signIn')
+    }
   }
 }
 </script>
