@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/firestore.js', '~/plugins/authpersistense'],
+  plugins: ['~/plugins/firestore.js', '~/plugins/authPersistense.js'],
   /*
    ** Nuxt.js dev-modules
    */
