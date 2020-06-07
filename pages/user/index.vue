@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h1>Hi</h1>
-    {{ cows }}
+    <h1>Hi {{ this.$store.state.user.uid }}</h1>
+    <ul v-for="cow in cows" :key="cow.name">
+      <li>
+        <n-link :to="'/user/cows/editcow/' + cow.name"> {{ cow }}</n-link>
+      </li>
+    </ul>
   </div>
 </template>
 
