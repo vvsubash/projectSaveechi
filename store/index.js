@@ -36,7 +36,7 @@ export const actions = {
         // console.log(result)
       })
       .then(() => {
-        this.$router.push('/dashboard')
+        this.$router.push('/user')
       })
       .catch((error) => {
         // eslint-disable-next-line

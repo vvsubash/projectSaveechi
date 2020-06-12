@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1>Hi {{ id }}</h1>
-    <input id="newCow" v-model="newCow" type="text" name="newCow" />
-    <button @click="addCow">Add Cow</button>
-    {{ cows }}
+    <h1>Hi {{ this.$store.state.user.uid }}</h1>
+    <ul v-for="cow in cows" :key="cow.name">
+      <li>
+        <n-link :to="'/user/cows/editcow/' + cow.name"> {{ cow.name }}</n-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -13,9 +15,7 @@ import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      id: this.$store.state.user.uid,
-      cows: [],
-      newCow: null
+      cows: []
     }
   },
   // watch: {
@@ -27,26 +27,17 @@ export default {
   //     }
   //   }
   // },
-  methods: {
-    addCow() {
-      const newCow = this.newCow
-      db.collection(`users/${this.$store.state.user.uid}/cows`)
-        .doc(newCow)
-        .set({
-          name: this.newCow
-        })
-    }
-  },
+
   firestore() {
     const uid = this.$store.state.user.uid
     return {
       cows: db.collection(`users/${uid}/cows`)
     }
-  }
+  },
 
-  // validate({ store }) {
-  //   return store.state.user != null
-  // }
+  validate({ store }) {
+    return store.state.user != null
+  }
 }
 </script>
 

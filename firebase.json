@@ -1,7 +1,7 @@
 {
   "firestore": {
-    "rules": "./firestore/firestore.rule",
-    "indexes": "./firestore/firestore.index.json"
+    "rules": "./firestore/firestore.rules",
+    "indexes": "./firestore/firestore.indexes.json"
   },
   "hosting": {
     "public": "dist",
