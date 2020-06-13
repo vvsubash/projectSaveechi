@@ -10,30 +10,30 @@
 </template>
 
 <script>
-// import { firestorePlugin } from 'vuefire'
 import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      cows: []
+      cows: [],
+      uid: this.$store.state.user.uid
     }
   },
-  // watch: {
-  //   id: {
-  //     // call it upon creation too
-  //     immediate: true,
-  //     handler(id) {
-  //       this.$bind('documents', db.collection('users').doc(id))
-  //     }
+  watch: {
+    uid: {
+      // call it upon creation too
+      immediate: true,
+      handler(uid) {
+        this.$bind('cows', db.collection(`users/${uid}/cows`))
+      }
+    }
+  },
+
+  // firestore() {
+  //   const uid = this.$store.state.user.uid
+  //   return {
+  //     cows: db.collection(`users/${uid}/cows`)
   //   }
   // },
-
-  firestore() {
-    const uid = this.$store.state.user.uid
-    return {
-      cows: db.collection(`users/${uid}/cows`)
-    }
-  },
 
   validate({ store }) {
     return store.state.user != null

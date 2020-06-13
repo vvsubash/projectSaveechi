@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1>
-      {{ cow }}
+      {{ cow.name }}
     </h1>
     <section>
       <form action="">
@@ -9,7 +9,7 @@
         <input v-model="dateOfRecentCalving" type="date" />
         {{ dateOfRecentCalving }}
         <p>
-          {{ heatDataController('justCalved', new Date(dateOfRecentCalving)) }}
+          <!-- {{ heatDataController('justCalved', new Date(dateOfRecentCalving)) }} -->
         </p>
       </form>
     </section>
@@ -17,13 +17,11 @@
 </template>
 
 <script>
-import { format, add } from 'date-fns'
-
 import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      cow: null,
+      cow: {},
       dateOfRecentCalving: null
     }
   },
@@ -33,26 +31,6 @@ export default {
     const uid = this.$store.state.user.uid
     return {
       cow: db.collection(`users/${uid}/cows`).doc(name)
-    }
-  },
-  computed: {},
-  methods: {
-    heatDataController(state, date) {
-      switch (state) {
-        case 'justCalved':
-          return {
-            dateOfRecentCalving: format(date, 'dd/MM/yyyy'),
-            whenCanSheBeInseminated: format(
-              add(date, {
-                days: 77
-              }),
-              'dd/MM/yyyy'
-            )
-          }
-
-        default:
-          break
-      }
     }
   }
 }
