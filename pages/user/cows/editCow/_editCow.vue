@@ -4,10 +4,11 @@
       {{ cow.name }}
     </h1>
     <section>
-      <form action="">
+      <form @submit.prevent="updateCow">
         <label for="state">What state is she is in</label>
-        <select id="state" v-model="state" name="state">
+        <select id="state" v-model="cow.state" name="state">
           <option value="justCalved">justCalved</option>
+          <option value="canBeInseminated">Can Be Inseminated</option>
           <option value="inseminated">inseminated</option>
           <option value="inseminatedAndConfirmed">
             Inseminated and confirmed
@@ -18,8 +19,7 @@
         <label for="dateOfRecentCalving">Date of recent calving</label>
 
         <input v-model="dateOfRecentCalving" type="date" />
-        {{ state }}
-        {{ dateOfRecentCalving }}
+        <input type="submit" />
       </form>
     </section>
   </main>
@@ -30,9 +30,7 @@ import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      cow: {},
-      state: null,
-      dateOfRecentCalving: null
+      cow: {}
     }
   },
 
@@ -43,9 +41,20 @@ export default {
       cow: db.collection(`users/${uid}/cows`).doc(name)
     }
   },
-  computed: {
-    name() {
-      return this.data
+  methods: {
+    updateCow() {
+      const uid = this.$store.state.user.uid
+      const name = this.$route.params.editCow
+      return db
+        .collection(`users/${uid}/cows`)
+        .doc(name)
+        .set(
+          {
+            state: this.cow.state,
+            dateOfRecentCalving: new Date(this.cow.dateOfRecentCalving)
+          },
+          { merge: true }
+        )
     }
   }
 }
