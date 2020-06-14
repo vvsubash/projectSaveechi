@@ -5,12 +5,21 @@
     </h1>
     <section>
       <form action="">
+        <label for="state">What state is she is in</label>
+        <select id="state" v-model="state" name="state">
+          <option value="justCalved">justCalved</option>
+          <option value="inseminated">inseminated</option>
+          <option value="inseminatedAndConfirmed">
+            Inseminated and confirmed
+          </option>
+          <option value="dry">Dry</option>
+          <option value="failedInsemination">Insemination Failed</option>
+        </select>
         <label for="dateOfRecentCalving">Date of recent calving</label>
+
         <input v-model="dateOfRecentCalving" type="date" />
+        {{ state }}
         {{ dateOfRecentCalving }}
-        <p>
-          <!-- {{ heatDataController('justCalved', new Date(dateOfRecentCalving)) }} -->
-        </p>
       </form>
     </section>
   </main>
@@ -22,6 +31,7 @@ export default {
   data() {
     return {
       cow: {},
+      state: null,
       dateOfRecentCalving: null
     }
   },
@@ -31,6 +41,11 @@ export default {
     const uid = this.$store.state.user.uid
     return {
       cow: db.collection(`users/${uid}/cows`).doc(name)
+    }
+  },
+  computed: {
+    name() {
+      return this.data
     }
   }
 }
