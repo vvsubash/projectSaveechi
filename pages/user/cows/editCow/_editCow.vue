@@ -6,19 +6,18 @@
     <section>
       <form @submit.prevent="updateCow">
         <label for="state">What state is she is in</label>
-        <select id="state" v-model="cow.state" name="state">
-          <option value="justCalved">justCalved</option>
-          <option value="canBeInseminated">Can Be Inseminated</option>
-          <option value="inseminated">inseminated</option>
-          <option value="inseminatedAndConfirmed">
-            Inseminated and confirmed
-          </option>
-          <option value="dry">Dry</option>
-          <option value="failedInsemination">Insemination Failed</option>
+        <select id="state" v-model="newStateOfCow" name="state">
+          <option
+            v-for="stateToBe in stateCanBe"
+            :key="stateToBe"
+            :value="stateToBe"
+            >{{ stateToBe }}</option
+          >
         </select>
         <label for="dateOfRecentCalving">Date of recent calving</label>
 
-        <input v-model="dateOfRecentCalving" type="date" />
+        <input v-model="cow.dateOfRecentCalving" type="date" />
+
         <input type="submit" />
       </form>
     </section>
@@ -30,7 +29,8 @@ import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      cow: {}
+      cow: {},
+      newStateOfCow: null
     }
   },
 
@@ -39,6 +39,31 @@ export default {
     const uid = this.$store.state.user.uid
     return {
       cow: db.collection(`users/${uid}/cows`).doc(name)
+    }
+  },
+  computed: {
+    stateCanBe() {
+      switch (this.cow.state) {
+        case 'justCalved':
+          return ['canBeInseminated', 'Inseminated']
+
+        case 'canBeInseminated':
+          return ['Inseminated']
+
+        case 'inseminated':
+          return ['dried', 'misscarried']
+
+        case 'dried':
+          return ['justCalved', 'misscarried']
+
+        case 'misscarried':
+          return ['canBeInseminated']
+
+        default:
+          return ['Somethings Wrong', 'justCalved']
+          // eslint-disable-next-line no-unreachable
+          break
+      }
     }
   },
   methods: {
@@ -50,7 +75,7 @@ export default {
         .doc(name)
         .set(
           {
-            state: this.cow.state,
+            state: this.newStateOfCow,
             dateOfRecentCalving: new Date(this.cow.dateOfRecentCalving)
           },
           { merge: true }
