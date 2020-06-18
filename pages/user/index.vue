@@ -1,40 +1,33 @@
 <template>
   <div>
-    <h1>Hi {{ this.$store.state.user.uid }}</h1>
+    <h1>Hi {{ uid }}</h1>
+    <nuxt-link to="/user/cows/addcow">Add Cows</nuxt-link>
     <ul v-for="cow in cows" :key="cow.name">
       <li>
-        <n-link :to="'/user/cows/' + cow.name"> {{ cow.name }}</n-link>
+        <nuxt-link :to="'/user/cows/' + cow.name">{{ cow.name }}</nuxt-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
 import db from '~/plugins/firestore'
+const user = firebase.auth().currentUser
+
 export default {
   data() {
     return {
       cows: [],
-      uid: this.$store.state.user.uid
+      uid: user.uid
     }
   },
-  watch: {
-    uid: {
-      // call it upon creation too
-      immediate: true,
-      handler(uid) {
-        this.$bind('cows', db.collection(`users/${uid}/cows`))
-      }
+  firestore() {
+    return {
+      cows: db.collection(`users/${this.uid}/cows`)
     }
   },
-
-  // firestore() {
-  //   const uid = this.$store.state.user.uid
-  //   return {
-  //     cows: db.collection(`users/${uid}/cows`)
-  //   }
-  // },
-
   validate({ store }) {
     return store.state.user != null
   }
