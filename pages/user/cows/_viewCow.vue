@@ -1,11 +1,9 @@
 <template>
   <main>
-    <h1>
-      {{ cow.name }}
-    </h1>
+    <h1>{{ cow.name }}</h1>
     <section>
       {{ cow }}
-      {{ cow.dateOfRecentCalving.toDate() }}
+      <!-- {{ cow.dateOfRecentCalving.toDate() }} -->
     </section>
   </main>
 </template>

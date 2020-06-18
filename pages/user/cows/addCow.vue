@@ -38,7 +38,19 @@ export default {
       ],
       cowStateEntered: null,
       dateOfRecentCalvingEntered: null,
-      wasSheInseminated: true
+      wasSheInseminated: false
+    }
+  },
+  watch: {
+    cowStateEntered: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
+        // eslint-disable-next-line no-constant-condition
+        this.cowStateEntered === 'inseminated' || 'dry'
+          ? (this.wasSheInseminated = true)
+          : (this.wasSheInseminated = false)
+      }
     }
   },
   methods: {
