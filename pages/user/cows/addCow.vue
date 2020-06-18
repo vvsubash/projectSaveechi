@@ -35,7 +35,7 @@ export default {
       possibleCowStates: [
         'justCalved',
         'canBeInseminated',
-        'insseminated',
+        'inseminated',
         'dry'
       ],
       cowStateEntered: null,
@@ -43,23 +43,22 @@ export default {
       wasSheInseminated: false
     }
   },
-  watch: {
-    cowStateEntered: {
-      immediate: true,
-      deep: true,
-      handler(newValue, oldValue) {
-        // eslint-disable-next-line no-constant-condition
-        this.cowStateEntered === 'inseminated' || 'dry'
-          ? (this.wasSheInseminated = true)
-          : (this.wasSheInseminated = false)
-      }
-    }
-  },
   computed: {
     whenCanSheBeInseminated() {
       return this.wasSheInseminated === false
         ? add(new Date(this.dateOfRecentCalvingEntered), { days: 77 })
         : null
+    }
+  },
+  watch: {
+    cowStateEntered: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
+        this.cowStateEntered === 'inseminated' || this.cowStateEntered === 'dry'
+          ? (this.wasSheInseminated = true)
+          : (this.wasSheInseminated = false)
+      }
     }
   },
   methods: {

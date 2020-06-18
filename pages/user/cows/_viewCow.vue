@@ -2,9 +2,7 @@
   <main>
     <h1>{{ cow.name }}</h1>
     <section>
-      <h3>
-        {{ cow.state }}
-      </h3>
+      <h3>{{ cow.state }}</h3>
       <h3>
         Date of recent calving of cow:
         {{
@@ -28,7 +26,6 @@
             : `Insemination is delayed by ${daysDelayed} days`
         }}
       </h3>
-      <h3>{{ cow }}</h3>
     </section>
   </main>
 </template>
@@ -47,8 +44,8 @@ export default {
     daysDelayed() {
       return this.cow.whenCanSheBeInseminated !== undefined
         ? differenceInCalendarDays(
-            this.cow.dateOfRecentCalving.toDate(),
-            this.cow.whenCanSheBeInseminated.toDate()
+            this.cow.whenCanSheBeInseminated.toDate(),
+            new Date()
           )
         : '0'
     }
