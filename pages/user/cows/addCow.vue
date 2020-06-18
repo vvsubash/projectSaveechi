@@ -17,12 +17,14 @@
       name="wasSheInseminated"
     />
     <label for="wasSheInseminated">Was She Inseminated</label>
+    {{ whenCanSheBeInseminated }}
     <br />
     <button @click="addCow">Add Cow</button>
   </div>
 </template>
 
 <script>
+import { add } from 'date-fns'
 import db from '~/plugins/firestore'
 
 export default {
@@ -53,6 +55,13 @@ export default {
       }
     }
   },
+  computed: {
+    whenCanSheBeInseminated() {
+      return this.wasSheInseminated === false
+        ? add(new Date(this.dateOfRecentCalvingEntered), { days: 77 })
+        : null
+    }
+  },
   methods: {
     addCow() {
       const newCow = this.newCow
@@ -62,7 +71,8 @@ export default {
           name: this.newCow,
           state: this.cowStateEntered,
           dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
-          wasSheInseminated: this.wasSheInseminated
+          wasSheInseminated: this.wasSheInseminated,
+          whenCanSheBeInseminated: this.whenCanSheBeInseminated
         })
     }
   },
