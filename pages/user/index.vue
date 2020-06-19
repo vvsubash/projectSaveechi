@@ -11,16 +11,13 @@
 </template>
 
 <script>
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
 import db from '~/plugins/firestore'
-const user = firebase.auth().currentUser
 
 export default {
   data() {
     return {
       cows: [],
-      uid: user.uid
+      uid: this.$store.state.user.uid
     }
   },
   firestore() {

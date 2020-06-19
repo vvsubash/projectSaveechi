@@ -17,12 +17,14 @@
       name="wasSheInseminated"
     />
     <label for="wasSheInseminated">Was She Inseminated</label>
+    {{ whenCanSheBeInseminated }}
     <br />
     <button @click="addCow">Add Cow</button>
   </div>
 </template>
 
 <script>
+import { add } from 'date-fns'
 import db from '~/plugins/firestore'
 
 export default {
@@ -33,12 +35,30 @@ export default {
       possibleCowStates: [
         'justCalved',
         'canBeInseminated',
-        'insseminated',
+        'inseminated',
         'dry'
       ],
       cowStateEntered: null,
       dateOfRecentCalvingEntered: null,
-      wasSheInseminated: true
+      wasSheInseminated: false
+    }
+  },
+  computed: {
+    whenCanSheBeInseminated() {
+      return this.wasSheInseminated === false
+        ? add(new Date(this.dateOfRecentCalvingEntered), { days: 77 })
+        : null
+    }
+  },
+  watch: {
+    cowStateEntered: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
+        this.cowStateEntered === 'inseminated' || this.cowStateEntered === 'dry'
+          ? (this.wasSheInseminated = true)
+          : (this.wasSheInseminated = false)
+      }
     }
   },
   methods: {
@@ -50,8 +70,15 @@ export default {
           name: this.newCow,
           state: this.cowStateEntered,
           dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
-          wasSheInseminated: this.wasSheInseminated
+          wasSheInseminated: this.wasSheInseminated,
+          whenCanSheBeInseminated: this.whenCanSheBeInseminated
         })
+        .then(
+          this.cowStateEntered === 'inseminated' ||
+            this.cowStateEntered === 'dry'
+            ? this.$router.push(`/user/cows/editcow/${this.newCow}`)
+            : this.$router.push('/user')
+        )
     }
   },
   validate({ store }) {
