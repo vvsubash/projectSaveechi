@@ -42,7 +42,8 @@ export default {
   },
   computed: {
     daysDelayed() {
-      return this.cow.whenCanSheBeInseminated !== undefined
+      return this.cow.whenCanSheBeInseminated !== undefined &&
+        this.cow.whenCanSheBeInseminated === false
         ? differenceInCalendarDays(
             this.cow.whenCanSheBeInseminated.toDate(),
             new Date()
