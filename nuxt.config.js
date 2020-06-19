@@ -51,6 +51,11 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     // '@nuxtjs/dotenv'
   ],
+  generate: {
+    exclude: [
+      /^\/user/ // path starts with /admin
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
