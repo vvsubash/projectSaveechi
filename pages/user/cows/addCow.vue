@@ -73,6 +73,12 @@ export default {
           wasSheInseminated: this.wasSheInseminated,
           whenCanSheBeInseminated: this.whenCanSheBeInseminated
         })
+        .then(
+          this.cowStateEntered === 'inseminated' ||
+            this.cowStateEntered === 'dry'
+            ? this.$router.push(`/user/cows/editcow/${this.newCow}`)
+            : this.$router.push('/user')
+        )
     }
   },
   validate({ store }) {
