@@ -2,25 +2,21 @@
   <main v-if="cow.name != null">
     <h1>{{ cow.name }}</h1>
     <section v-if="cow.state == 'justCalved'">
+      <!-- <h4>
+        {{
+          `She calved on ${cow.dateOfRecentCalving} and can be inseminated on need to fix on logic`
+        }}
+      </h4>
       <form @submit.prevent="updateCow">
-        <label for="state">What state is she is in</label>
-        <select id="state" v-model="newStateOfCow" name="state">
-          <option
-            v-for="stateToBe in stateCanBe"
-            :key="stateToBe"
-            :value="stateToBe"
-            >{{ stateToBe }}</option
-          >
-        </select>
-        <label for="dateOfRecentCalving">Date of recent calving</label>
-
-        <input v-model="cow.dateOfRecentCalving" type="date" />
+        <label for="observedHeat">Observed Heat</label>
+        <input v-model="ck" type="date" name="observedHeat" />
         <input type="submit" />
-      </form>
+      </form> -->
+      <editCowJustCalved />
     </section>
 
     <section v-else-if="cow.state == 'canBeInseminated'">
-      cow can BE Inseminated
+      <editCowJustCalved />
     </section>
 
     <section v-else-if="cow.state === 'inseminated'">
@@ -54,11 +50,16 @@
 
 <script>
 import db from '~/plugins/firestore'
+import editCowJustCalved from '~/components/edit-cow-just-calved'
 export default {
+  components: {
+    editCowJustCalved
+  },
   data() {
     return {
       cow: {},
-      newStateOfCow: null
+      newStateOfCow: null,
+      ck: null
     }
   },
 
