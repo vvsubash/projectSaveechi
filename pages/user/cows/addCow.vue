@@ -4,9 +4,9 @@
     <input id="newCow" v-model="newCow" type="text" name="newCow" />
     <label for="state">What state is she is in</label>
     <select id="state" v-model="cowStateEntered" name="state">
-      <option v-for="cowState in possibleCowStates" :key="cowState">{{
-        cowState
-      }}</option>
+      <option v-for="cowState in possibleCowStates" :key="cowState">
+        {{ cowState }}
+      </option>
     </select>
     <label for="dateOfRecentCalving">Date of recent calving</label>
     <input v-model="dateOfRecentCalvingEntered" type="date" />
@@ -70,8 +70,7 @@ export default {
           name: this.newCow,
           state: this.cowStateEntered,
           dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
-          wasSheInseminated: this.wasSheInseminated,
-          whenCanSheBeInseminated: this.whenCanSheBeInseminated
+          wasSheInseminated: this.wasSheInseminated
         })
         .then(
           this.cowStateEntered === 'inseminated' ||

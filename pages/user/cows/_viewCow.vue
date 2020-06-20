@@ -1,6 +1,10 @@
 <template>
   <main>
-    <h1>{{ cow.name }}</h1>
+    <h1>
+      <nuxt-link :to="'/user/cows/editcow/' + cow.name">{{
+        cow.name
+      }}</nuxt-link>
+    </h1>
     <section>
       <h3>{{ cow.state }}</h3>
       <h3>
