@@ -29,11 +29,9 @@ export const actions = {
         // The signed-in user info.
         const user = {
           ...result.user.providerData[0],
-          uid: result.uid
+          uid: result.user.uid
         }
         commit('setUser', user)
-        // // eslint-disable-next-line
-        // console.log(result)
       })
       .then(() => {
         this.$router.push('/user')
@@ -41,6 +39,7 @@ export const actions = {
       .catch((error) => {
         // eslint-disable-next-line
         console.log(error.code, error.message)
+        alert(error.code, error.message)
         // Handle Errors here.
         // const errorCode = error.code
         // const errorMessage = error.message
