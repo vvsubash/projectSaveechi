@@ -6,26 +6,26 @@
       }}
     </h4>
     <form @submit.prevent="updateCow">
-      <label for="eventToBeRecorded">Event To be recorded</label>
+      <label for="eventtoberecorded">Event To be recorded</label>
 
       <input
         id="recordHeat"
-        v-model="eventToBeRecorded"
+        v-model="eventtoberecorded"
         type="radio"
-        name="eventToBeRecorded"
+        name="eventtoberecorded"
         value="recordHeat"
       />
       <label for="recordHeat">Record Heat</label><br />
       <input
         id="inseminated"
-        v-model="eventToBeRecorded"
+        v-model="eventtoberecorded"
         type="radio"
-        name="eventToBeRecorded"
+        name="eventtoberecorded"
         value="inseminated"
       />
       <label for="inseminated">Inseminated</label><br />
 
-      <section v-if="eventToBeRecorded == 'recordHeat'">
+      <section v-if="eventtoberecorded == 'recordHeat'">
         <label for="">Observed Heat</label>
         <input
           v-model="dateOfObservedHeat"
@@ -34,7 +34,7 @@
         />
         <input type="submit" />
       </section>
-      <section v-if="eventToBeRecorded == 'inseminated'">
+      <section v-if="eventtoberecorded == 'inseminated'">
         <label for="dateOfInsemination">Date Of Insemination</label>
         <input
           v-model="dateOfInsemination"
@@ -44,7 +44,7 @@
         <input type="submit" />
       </section>
     </form>
-    {{ eventToBeRecorded }}
+    {{ eventtoberecorded }}
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
         return {}
       }
     },
-    eventToBeRecorded: {
+    eventoBeRecorded: {
       type: String,
       default: null
     },
@@ -75,7 +75,7 @@ export default {
     updateCow() {
       const uid = this.$store.state.user.uid
       const name = this.$route.params.editCow
-      if (this.eventToBeRecorded === 'recordHeat') {
+      if (this.eventtoberecorded === 'recordHeat') {
         return db
           .collection(`users/${uid}/cows`)
           .doc(name)
