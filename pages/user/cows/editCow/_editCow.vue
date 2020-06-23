@@ -6,7 +6,7 @@
     </section>
 
     <section v-else-if="cow.state == 'canBeInseminated'">
-      <editCowJustCalved :cow="cow" :eventtoberecorded="eventToBeRecorded" />
+      <editCowJustCalved :cow="cow" />
     </section>
 
     <section v-else-if="cow.state === 'inseminated'">
@@ -38,12 +38,9 @@ export default {
   },
   data() {
     return {
-      cow: {},
-      eventToBeRecorded: null,
-      check1: false
+      cow: {}
     }
   },
-
   firestore() {
     const name = this.$route.params.editCow
     const uid = this.$store.state.user.uid

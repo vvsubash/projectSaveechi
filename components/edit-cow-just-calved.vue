@@ -6,26 +6,26 @@
       }}
     </h4>
     <form @submit.prevent="updateCow">
-      <label for="eventtoberecorded">Event To be recorded</label>
+      <label for="eventToBeRecorded">Event To be recorded</label>
 
       <input
         id="recordHeat"
-        v-model="eventtoberecorded"
+        v-model="eventToBeRecorded"
         type="radio"
-        name="eventtoberecorded"
+        name="eventToBeRecorded"
         value="recordHeat"
       />
       <label for="recordHeat">Record Heat</label><br />
       <input
         id="inseminated"
-        v-model="eventtoberecorded"
+        v-model="eventToBeRecorded"
         type="radio"
-        name="eventtoberecorded"
+        name="eventToBeRecorded"
         value="inseminated"
       />
       <label for="inseminated">Inseminated</label><br />
 
-      <section v-if="eventtoberecorded == 'recordHeat'">
+      <section v-if="eventToBeRecorded == 'recordHeat'">
         <label for="">Observed Heat</label>
         <input
           v-model="dateOfObservedHeat"
@@ -34,7 +34,7 @@
         />
         <input type="submit" />
       </section>
-      <section v-if="eventtoberecorded == 'inseminated'">
+      <section v-if="eventToBeRecorded == 'inseminated'">
         <label for="dateOfInsemination">Date Of Insemination</label>
         <input
           v-model="dateOfInsemination"
@@ -44,7 +44,6 @@
         <input type="submit" />
       </section>
     </form>
-    {{ eventtoberecorded }}
   </div>
 </template>
 
@@ -58,9 +57,9 @@ export default {
         return {}
       }
     },
-    eventoBeRecorded: {
+    eventToBeRecorded: {
       type: String,
-      default: null
+      default: 'recordHeat'
     },
     dateOfObservedHeat: {
       type: Date,
@@ -75,7 +74,7 @@ export default {
     updateCow() {
       const uid = this.$store.state.user.uid
       const name = this.$route.params.editCow
-      if (this.eventtoberecorded === 'recordHeat') {
+      if (this.eventToBeRecorded === 'recordHeat') {
         return db
           .collection(`users/${uid}/cows`)
           .doc(name)
