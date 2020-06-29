@@ -7,6 +7,7 @@
         <nuxt-link :to="'/user/cows/' + cow.name">{{ cow.name }}</nuxt-link>
       </li>
     </ul>
+    <button @click="getCows">jh</button>
   </div>
 </template>
 
@@ -23,6 +24,11 @@ export default {
   firestore() {
     return {
       cows: db.collection(`users/${this.uid}/cows`)
+    }
+  },
+  methods: {
+    getCows() {
+      this.$store.dispatch('cows/getCows')
     }
   },
   validate({ store }) {

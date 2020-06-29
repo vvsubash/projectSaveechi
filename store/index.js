@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
-
+import { vuexfireMutations } from 'vuexfire'
 export const state = () => ({
   user: null
 })
@@ -14,7 +14,8 @@ export const getters = {
 export const mutations = {
   setUser: (state, payload) => {
     state.user = payload
-  }
+  },
+  ...vuexfireMutations
 }
 
 export const actions = {
