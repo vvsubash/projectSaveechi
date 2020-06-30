@@ -7,29 +7,19 @@
         <nuxt-link :to="'/user/cows/' + cow.name">{{ cow.name }}</nuxt-link>
       </li>
     </ul>
-    <button @click="getCows">jh</button>
   </div>
 </template>
 
 <script>
-import db from '~/plugins/firestore'
-
 export default {
   data() {
     return {
-      cows: [],
+      cows: this.$store.state.cows.cows,
       uid: this.$store.state.user.uid
     }
   },
-  firestore() {
-    return {
-      cows: db.collection(`users/${this.uid}/cows`)
-    }
-  },
-  methods: {
-    getCows() {
-      this.$store.dispatch('cows/getCows')
-    }
+  beforeCreate() {
+    this.$store.dispatch('cows/getCows')
   },
   validate({ store }) {
     return store.state.user != null
