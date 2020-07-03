@@ -30,7 +30,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/firestore.js', '~/plugins/authPersistense.js'],
+  plugins: [
+    '~/plugins/firestore.js',
+    '~/plugins/authPersistense.js',
+    '~/plugins/vue-formulate'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
