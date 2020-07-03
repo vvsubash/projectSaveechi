@@ -5,7 +5,7 @@
         `She calved on ${cow.dateOfRecentCalving} and can be inseminated on need to fix on logic`
       }}
     </h4>
-    <form @submit.prevent="updateCow">
+    <FormulateForm @submit.prevent="updateCow">
       <label for="eventToBeRecorded">Event To be recorded</label>
 
       <input
@@ -23,10 +23,18 @@
         name="eventToBeRecorded"
         value="inseminated"
       />
-      <label for="inseminated">Inseminated</label><br />
+      <!-- <FormulateInput
+        v-model="eventToBeRecorded"
+        type="radio"
+        error-behavior="live"
+        validation="in:recordHeat,inseminated"
+        :options="{ recordHeat: 'I like Toyota', inseminated: 'I like Honda' }"
+      /> -->
+      <label for="inseminated">Inseminated</label>
+      <br />
 
       <section v-if="eventToBeRecorded == 'recordHeat'">
-        <label for="">Observed Heat</label>
+        <label for>Observed Heat</label>
         <input
           v-model="dateOfObservedHeat"
           type="date"
@@ -43,7 +51,7 @@
         />
         <input type="submit" />
       </section>
-    </form>
+    </FormulateForm>
   </div>
 </template>
 
@@ -56,18 +64,22 @@ export default {
       default: () => {
         return {}
       }
-    },
-    eventToBeRecorded: {
-      type: String,
-      default: 'recordHeat'
-    },
-    dateOfObservedHeat: {
-      type: Date,
-      default: null
-    },
-    dateOfInsemination: {
-      type: Date,
-      default: null
+    }
+  },
+  data() {
+    return {
+      eventToBeRecorded: {
+        type: String,
+        default: 'recordHeat'
+      },
+      dateOfObservedHeat: {
+        type: Date,
+        default: null
+      },
+      dateOfInsemination: {
+        type: Date,
+        default: null
+      }
     }
   },
   methods: {

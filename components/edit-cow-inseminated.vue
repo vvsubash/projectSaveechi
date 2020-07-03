@@ -33,22 +33,26 @@ export default {
       default: () => {
         return {}
       }
-    },
-    check1: {
-      type: Boolean,
-      default: false
-    },
-    check2: {
-      type: Boolean,
-      default: false
-    },
-    check3: {
-      type: Boolean,
-      default: false
-    },
-    driedOf: {
-      type: Boolean,
-      default: false
+    }
+  },
+  data() {
+    return {
+      check1: {
+        type: Boolean,
+        default: false
+      },
+      check2: {
+        type: Boolean,
+        default: false
+      },
+      check3: {
+        type: Boolean,
+        default: false
+      },
+      driedOf: {
+        type: Boolean,
+        default: false
+      }
     }
   },
   methods: {

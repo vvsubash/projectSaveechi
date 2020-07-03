@@ -1,17 +1,31 @@
 <template>
-  <div>
-    <h4>
-      <ul>
-        <li>1st Calcium</li>
-        <!-- if calved is checked ask for
-          dateofcalving details of calve and
-          refresh the page -->
-        <li>CheckBox for Calved</li>
-      </ul>
-    </h4>
-  </div>
+  <FormulateForm v-model="formValues" class="login-form" @submit="hi">
+    <FormulateInput
+      v-model="value"
+      :options="{
+        first: 'First',
+        second: 'Second'
+      }"
+      type="radio"
+      label="This is a label for all the options"
+    />
+    {{ formValues + value }}
+    <FormulateInput type="submit" label="Register" />
+  </FormulateForm>
 </template>
+
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      formValues: {},
+      value: 'second'
+    }
+  },
+  methods: {
+    hi() {
+      alert(this.formValues)
+    }
+  }
+}
 </script>
-<style lang="scss" scoped></style>
