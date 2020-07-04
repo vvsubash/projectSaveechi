@@ -5,7 +5,7 @@
         `She calved on ${cow.dateOfRecentCalving} and can be inseminated on need to fix on logic`
       }}
     </h4>
-    <FormulateForm @submit.prevent="updateCow">
+    <FormulateForm @submit="updateCow">
       <label for="eventToBeRecorded">Event To be recorded</label>
 
       <input

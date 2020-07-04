@@ -10,8 +10,7 @@
     </section>
 
     <section v-else-if="cow.state === 'inseminated'">
-      <editCowInseminated :cow="cow" :check1="check1" />
-      {{ check1 }}
+      <editCowInseminated :cow="cow" />
     </section>
 
     <section v-else-if="cow.state == 'dry'">

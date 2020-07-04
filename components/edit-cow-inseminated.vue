@@ -16,7 +16,7 @@
       <label for="check1">3rd confirmation</label>
       <br />
       <input id="driedOf" v-model="driedOf" type="checkbox" name="driedOf" />
-      <label for="driedOf">1st confirmation</label>
+      <label for="driedOf">Dried Of</label>
       <br />
       {{ driedOf }}
       <input type="submit" />
@@ -37,22 +37,10 @@ export default {
   },
   data() {
     return {
-      check1: {
-        type: Boolean,
-        default: false
-      },
-      check2: {
-        type: Boolean,
-        default: false
-      },
-      check3: {
-        type: Boolean,
-        default: false
-      },
-      driedOf: {
-        type: Boolean,
-        default: false
-      }
+      check1: this.cow.isCheckOneCompleted,
+      check2: this.cow.isCheckTwoCompleted,
+      check3: this.cow.isCheckThreeCompleted,
+      driedOf: false
     }
   },
   methods: {
@@ -73,12 +61,9 @@ export default {
           .doc(name)
           .set(
             {
-              sheWasInseminatedOn: new Date(this.dateOfInsemination),
-              wasSheInseminated: true,
-              state: 'inseminated',
               isCheckOneCompleted: this.check1,
               isCheckTwoCompleted: this.check2,
-              isCheckThreeComplted: this.check3
+              isCheckThreeCompleted: this.check3
             },
             { merge: true }
           )
