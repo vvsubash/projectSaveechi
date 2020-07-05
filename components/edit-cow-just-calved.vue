@@ -9,7 +9,7 @@
       <label for="eventToBeRecorded">Event To be recorded</label>
 
       <input
-        id="recordHeat"
+        id="recordHeyarn devat"
         v-model="eventToBeRecorded"
         type="radio"
         name="eventToBeRecorded"
@@ -23,13 +23,6 @@
         name="eventToBeRecorded"
         value="inseminated"
       />
-      <!-- <FormulateInput
-        v-model="eventToBeRecorded"
-        type="radio"
-        error-behavior="live"
-        validation="in:recordHeat,inseminated"
-        :options="{ recordHeat: 'I like Toyota', inseminated: 'I like Honda' }"
-      /> -->
       <label for="inseminated">Inseminated</label>
       <br />
 
@@ -49,6 +42,8 @@
           type="date"
           name="dateOfObservedHeat"
         />
+        <label for="semenIdNumber">Semen Id Number</label>
+        <input v-model="semenIdNumber" type="date" name="dateOfObservedHeat" />
         <input type="submit" />
       </section>
     </FormulateForm>
@@ -56,7 +51,9 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
 import db from '~/plugins/firestore'
+import 'firebase/firestore'
 export default {
   props: {
     cow: {
@@ -68,18 +65,10 @@ export default {
   },
   data() {
     return {
-      eventToBeRecorded: {
-        type: String,
-        default: 'recordHeat'
-      },
-      dateOfObservedHeat: {
-        type: Date,
-        default: null
-      },
-      dateOfInsemination: {
-        type: Date,
-        default: null
-      }
+      eventToBeRecorded: 'recordHeat',
+      dateOfObservedHeat: null,
+      dateOfInsemination: null,
+      semenIdNumber: null
     }
   },
   methods: {
@@ -92,7 +81,9 @@ export default {
           .doc(name)
           .set(
             {
-              dateOfObservedHeat: new Date(this.dateOfObservedHeat)
+              dateOfObservedHeat: firebase.firestore.FieldValue.arrayUnion(
+                new Date(this.dateOfObservedHeat)
+              )
             },
             { merge: true }
           )
@@ -103,8 +94,8 @@ export default {
           .set(
             {
               sheWasInseminatedOn: new Date(this.dateOfInsemination),
-              wasSheInseminated: true,
-              state: 'inseminated'
+              state: 'inseminated',
+              semenIdNumber: this.semenIdNumber
             },
             { merge: true }
           )
