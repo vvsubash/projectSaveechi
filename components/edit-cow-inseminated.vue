@@ -12,8 +12,8 @@
       <input id="check2" v-model="check2" type="checkbox" name="check2" />
       <label for="check2">2st confirmation</label>
       <br />
-      <input id="check1" v-model="check3" type="checkbox" name="check3" />
-      <label for="check1">3rd confirmation</label>
+      <input id="check3" v-model="check3" type="checkbox" name="check3" />
+      <label for="check3">3rd confirmation</label>
       <br />
       <input id="driedOf" v-model="driedOf" type="checkbox" name="driedOf" />
       <label for="driedOf">Dried Of</label>
