@@ -5,11 +5,11 @@
         `She calved on ${cow.dateOfRecentCalving} and can be inseminated on need to fix on logic`
       }}
     </h4>
-    <form @submit.prevent="updateCow">
+    <FormulateForm @submit="updateCow">
       <label for="eventToBeRecorded">Event To be recorded</label>
 
       <input
-        id="recordHeat"
+        id="recordHeyarn devat"
         v-model="eventToBeRecorded"
         type="radio"
         name="eventToBeRecorded"
@@ -23,10 +23,11 @@
         name="eventToBeRecorded"
         value="inseminated"
       />
-      <label for="inseminated">Inseminated</label><br />
+      <label for="inseminated">Inseminated</label>
+      <br />
 
       <section v-if="eventToBeRecorded == 'recordHeat'">
-        <label for="">Observed Heat</label>
+        <label for>Observed Heat</label>
         <input
           v-model="dateOfObservedHeat"
           type="date"
@@ -41,14 +42,18 @@
           type="date"
           name="dateOfObservedHeat"
         />
+        <label for="semenIdNumber">Semen Id Number</label>
+        <input v-model="semenIdNumber" type="date" name="dateOfObservedHeat" />
         <input type="submit" />
       </section>
-    </form>
+    </FormulateForm>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase/app'
 import db from '~/plugins/firestore'
+import 'firebase/firestore'
 export default {
   props: {
     cow: {
@@ -56,18 +61,14 @@ export default {
       default: () => {
         return {}
       }
-    },
-    eventToBeRecorded: {
-      type: String,
-      default: 'recordHeat'
-    },
-    dateOfObservedHeat: {
-      type: Date,
-      default: null
-    },
-    dateOfInsemination: {
-      type: Date,
-      default: null
+    }
+  },
+  data() {
+    return {
+      eventToBeRecorded: 'recordHeat',
+      dateOfObservedHeat: null,
+      dateOfInsemination: null,
+      semenIdNumber: null
     }
   },
   methods: {
@@ -80,7 +81,9 @@ export default {
           .doc(name)
           .set(
             {
-              dateOfObservedHeat: new Date(this.dateOfObservedHeat)
+              dateOfObservedHeat: firebase.firestore.FieldValue.arrayUnion(
+                new Date(this.dateOfObservedHeat)
+              )
             },
             { merge: true }
           )
@@ -91,8 +94,8 @@ export default {
           .set(
             {
               sheWasInseminatedOn: new Date(this.dateOfInsemination),
-              wasSheInseminated: true,
-              state: 'inseminated'
+              state: 'inseminated',
+              semenIdNumber: this.semenIdNumber
             },
             { merge: true }
           )

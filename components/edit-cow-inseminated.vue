@@ -12,11 +12,11 @@
       <input id="check2" v-model="check2" type="checkbox" name="check2" />
       <label for="check2">2st confirmation</label>
       <br />
-      <input id="check1" v-model="check3" type="checkbox" name="check3" />
-      <label for="check1">3rd confirmation</label>
+      <input id="check3" v-model="check3" type="checkbox" name="check3" />
+      <label for="check3">3rd confirmation</label>
       <br />
       <input id="driedOf" v-model="driedOf" type="checkbox" name="driedOf" />
-      <label for="driedOf">1st confirmation</label>
+      <label for="driedOf">Dried Of</label>
       <br />
       {{ driedOf }}
       <input type="submit" />
@@ -33,22 +33,14 @@ export default {
       default: () => {
         return {}
       }
-    },
-    check1: {
-      type: Boolean,
-      default: false
-    },
-    check2: {
-      type: Boolean,
-      default: false
-    },
-    check3: {
-      type: Boolean,
-      default: false
-    },
-    driedOf: {
-      type: Boolean,
-      default: false
+    }
+  },
+  data() {
+    return {
+      check1: this.cow.isCheckOneCompleted,
+      check2: this.cow.isCheckTwoCompleted,
+      check3: this.cow.isCheckThreeCompleted,
+      driedOf: false
     }
   },
   methods: {
@@ -69,12 +61,9 @@ export default {
           .doc(name)
           .set(
             {
-              sheWasInseminatedOn: new Date(this.dateOfInsemination),
-              wasSheInseminated: true,
-              state: 'inseminated',
               isCheckOneCompleted: this.check1,
               isCheckTwoCompleted: this.check2,
-              isCheckThreeComplted: this.check3
+              isCheckThreeCompleted: this.check3
             },
             { merge: true }
           )
