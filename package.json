@@ -30,7 +30,6 @@
     "@braid/vue-formulate": "^2.4.2",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/now-builder": "^0.17.3",
     "@nuxtjs/pwa": "^3.0.0-0",
     "date-fns": "^2.14.0",
     "firebase": "^7.15.0",
@@ -40,6 +39,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
+    "@nuxtjs/now-builder": "^0.17.3",
     "@commitlint/config-conventional": "^8.3.4",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
