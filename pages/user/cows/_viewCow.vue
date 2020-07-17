@@ -36,11 +36,9 @@
 
 <script>
 import { differenceInCalendarDays } from 'date-fns'
-import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      cow: {},
       newStateOfCow: null
     }
   },
@@ -53,13 +51,11 @@ export default {
             new Date()
           )
         : '0'
-    }
-  },
-  firestore() {
-    const name = this.$route.params.viewCow
-    const uid = this.$store.state.user.uid
-    return {
-      cow: db.collection(`users/${uid}/cows`).doc(name)
+    },
+    cow() {
+      return this.$store.state.cows.cows.find((x) => {
+        return x.name === this.$route.params.viewCow
+      })
     }
   }
 }

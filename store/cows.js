@@ -3,7 +3,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/firestore'
 import { firestoreAction } from 'vuexfire'
 export const state = () => ({
-  cows: {}
+  cows: []
 })
 
 export const getters = {

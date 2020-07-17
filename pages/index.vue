@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <!-- TODO need to refactor -->
-    <button @click="signIn">Login</button>
+    <header>
+      <button @click="signIn">Login</button>
+    </header>
   </div>
 </template>
 
