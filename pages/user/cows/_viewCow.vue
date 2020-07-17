@@ -7,7 +7,8 @@
     </h1>
     <section>
       <h3>{{ cow.state }}</h3>
-      <h3>
+      <br />
+      <!-- <h3>
         Date of recent calving of cow:
         {{
           cow.dateOfRecentCalving != undefined
@@ -29,7 +30,7 @@
             ? `She Can Be Inseminated in ${daysDelayed} days`
             : `Insemination is delayed by ${daysDelayed} days`
         }}
-      </h3>
+      </h3> -->
     </section>
   </main>
 </template>

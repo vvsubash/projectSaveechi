@@ -27,8 +27,10 @@
     }
   },
   "dependencies": {
+    "@braid/vue-formulate": "^2.4.2",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/now-builder": "^0.17.3",
     "@nuxtjs/pwa": "^3.0.0-0",
     "date-fns": "^2.14.0",
     "firebase": "^7.15.0",
