@@ -40,7 +40,7 @@
         <input
           v-model="dateOfInsemination"
           type="date"
-          name="dateOfObservedHeat"
+          name="dateOfInsemination"
         />
         <label for="semenIdNumber">Semen Id Number</label>
         <input v-model="semenIdNumber" type="date" name="dateOfObservedHeat" />
