@@ -15,7 +15,8 @@
         name="eventToBeRecorded"
         value="recordHeat"
       />
-      <label for="recordHeat">Record Heat</label><br />
+      <label for="recordHeat">Record Heat</label>
+      <br />
       <input
         id="inseminated"
         v-model="eventToBeRecorded"
@@ -43,7 +44,7 @@
           name="dateOfInsemination"
         />
         <label for="semenIdNumber">Semen Id Number</label>
-        <input v-model="semenIdNumber" type="date" name="dateOfObservedHeat" />
+        <input v-model="semenIdNumber" type="text" name="dateOfObservedHeat" />
         <input type="submit" />
       </section>
     </form>
@@ -91,14 +92,14 @@ export default {
         return db
           .collection(`users/${uid}/cows`)
           .doc(name)
-          .set(
-            {
-              sheWasInseminatedOn: new Date(this.dateOfInsemination),
-              state: 'inseminated',
-              semenIdNumber: this.semenIdNumber
-            },
-            { merge: true }
-          )
+          .set({
+            name: this.cow.name,
+            dateOfRecentCalving: this.cow.dateOfRecentCalving,
+            state: 'inseminated',
+            sheWasInseminatedOn: new Date(this.dateOfInsemination),
+            semenId: this.semenIdNumber,
+            isSheMilking: true
+          })
       }
     }
   }
