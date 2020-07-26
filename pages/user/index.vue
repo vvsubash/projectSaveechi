@@ -1,8 +1,13 @@
 <template>
   <v-app class="dashboard">
     <h1>Hi {{ uid }}</h1>
-    <!-- <nuxt-link to="/user/cows/addcow">Add Cows</nuxt-link>
-    <ul v-for="cow in cows" :key="cow.name">
+    <nuxt-link to="/user/cows/addcow">
+      <v-btn>
+        Add Cows
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </nuxt-link>
+    <!-- <ul v-for="cow in cows" :key="cow.name">
       <li>
         <nuxt-link :to="'/user/cows/' + cow.name">{{ cow.name }}</nuxt-link>
       </li>
