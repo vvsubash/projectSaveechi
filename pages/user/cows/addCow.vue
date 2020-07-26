@@ -32,12 +32,7 @@ export default {
     return {
       newCow: null,
       cowType: null,
-      possibleCowStates: [
-        'justCalved',
-        'canBeInseminated',
-        'inseminated',
-        'dry'
-      ],
+      possibleCowStates: ['justCalved', 'inseminated', 'dry'],
       cowStateEntered: null,
       dateOfRecentCalvingEntered: null,
       wasSheInseminated: false
@@ -69,8 +64,7 @@ export default {
         .set({
           name: this.newCow,
           state: this.cowStateEntered,
-          dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
-          wasSheInseminated: this.wasSheInseminated
+          dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered)
         })
         .then(
           this.cowStateEntered === 'inseminated' ||
