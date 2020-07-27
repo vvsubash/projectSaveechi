@@ -4,6 +4,14 @@
       {{ `dried of` }}
     </h4>
     <form @submit.prevent="updateCow">
+      <v-checkbox
+        v-model="calciumShouldBeGivenOn"
+        :error-messages="checkboxErrors"
+        label="Calcium Should Be Given On "
+        disabled
+        @change="$v.checkbox.$touch()"
+        @blur="$v.checkbox.$touch()"
+      ></v-checkbox>
       <input id="check1" v-model="check1" type="checkbox" name="check1" />
       <label for="check1">1st confirmation</label>
       <br />
