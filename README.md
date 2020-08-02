@@ -1,22 +1,4 @@
-# projectSaveechi
+# Project Saveechi
+I'am makking an app to make life of small sclae dairy farmers life easy.
 
-> My majestic Nuxt.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Anyone who has intrest in Nuxt or Firebase or Google Cloud can help.

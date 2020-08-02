@@ -5,7 +5,7 @@
         `She calved on ${cow.dateOfRecentCalving} and can be inseminated on need to fix on logic`
       }}
     </h4>
-    <FormulateForm @submit="updateCow">
+    <form @submit="updateCow">
       <label for="eventToBeRecorded">Event To be recorded</label>
 
       <input
@@ -41,13 +41,13 @@
         <input
           v-model="dateOfInsemination"
           type="date"
-          name="dateOfObservedHeat"
+          name="dateOfInsemination"
         />
         <label for="semenIdNumber">Semen Id Number</label>
         <input v-model="semenIdNumber" type="text" name="dateOfObservedHeat" />
         <input type="submit" />
       </section>
-    </FormulateForm>
+    </form>
   </div>
 </template>
 
