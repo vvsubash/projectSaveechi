@@ -32,7 +32,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/vuetify": "^1.11.2",
     "date-fns": "^2.14.0",
-    "firebase": "^7.15.0",
+    "firebase": "^7.17.2",
     "nuxt": "^2.0.0",
     "vuefire": "^2.2.2",
     "vuexfire": "^3.2.2"
