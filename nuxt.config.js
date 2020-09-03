@@ -1,5 +1,9 @@
 export default {
   mode: 'spa',
+  storybook: {
+    stories: ['~/stories/**/*.stories.js']
+    // Options
+  },
   /*
    ** Headers of the page
    */
