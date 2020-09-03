@@ -1,24 +1,37 @@
 <template>
   <div>
-    <label for="newCow">Name of the Animal</label>
-    <input id="newCow" v-model="newCow" type="text" name="newCow" />
-    <label for="state">What state is she is in</label>
-    <select id="state" v-model="cowStateEntered" name="state">
-      <option v-for="cowState in possibleCowStates" :key="cowState">
-        {{ cowState }}
-      </option>
-    </select>
-    <label for="dateOfRecentCalving">Date of recent calving</label>
-    <input v-model="dateOfRecentCalvingEntered" type="date" />
-    <input
-      id="wasSheInseminated"
-      v-model="wasSheInseminated"
-      type="checkbox"
-      name="wasSheInseminated"
-    />
-    <label for="wasSheInseminated">Was She Inseminated</label>
-    {{ whenCanSheBeInseminated }}
-    <br />
+    <v-form data-app class="text-center">
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="newCow"
+              label="Name of the Animal"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="dateOfRecentCalvingEntered"
+              type="date"
+              label="Date of recent calving"
+            ></v-text-field>
+            <v-select
+              v-model="cowStateEntered"
+              :items="possibleCowStates"
+              label="State Of Cow"
+              required
+            ></v-select>
+            <v-checkbox
+              v-model="wasSheInseminated"
+              label="Was She Inseminated"
+              type="checkbox"
+              required
+              disabled
+            ></v-checkbox>
+            <v-btn outlined large @click="addCow">Add Cow</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
     <button @click="addCow">Add Cow</button>
   </div>
 </template>
