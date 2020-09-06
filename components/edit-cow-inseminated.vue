@@ -19,7 +19,7 @@
       <label for="driedOf">Dried Of</label>
       <br />
       {{ driedOf }}
-      <input type="submit" />
+      <input type="submit" @click="updateCow" />
     </form>
   </div>
 </template>
@@ -37,9 +37,9 @@ export default {
   },
   data() {
     return {
-      check1: this.cow.isCheckOneCompleted,
-      check2: this.cow.isCheckTwoCompleted,
-      check3: this.cow.isCheckThreeCompleted,
+      check1: this.cow.isCheckOneCompleted || false,
+      check2: this.cow.isCheckTwoCompleted || false,
+      check3: this.cow.isCheckThreeCompleted || false,
       driedOf: false
     }
   },
