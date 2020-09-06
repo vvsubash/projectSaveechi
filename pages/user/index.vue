@@ -12,7 +12,9 @@
         <v-layout row wrap class="pa-3">
           <v-flex xs12 md6>
             <div class="caption grey--text">Name</div>
-            <div>{{ cow.name }}</div>
+            <nuxt-link :to="'/user/cows/editcow/' + cow.name"
+              >{{ cow.name }}
+            </nuxt-link>
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">State</div>
