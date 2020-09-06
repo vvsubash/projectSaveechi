@@ -20,6 +20,14 @@
               label="State Of Cow"
               required
             ></v-select>
+            <v-text-field
+              v-show="
+                cowStateEntered == 'inseminated' || cowsStateEntered == 'dry'
+              "
+              v-model="sheWasInseminatedOn"
+              type="date"
+              label="She was inseminated on"
+            ></v-text-field>
             <v-checkbox
               v-model="wasSheInseminated"
               label="Was She Inseminated"
@@ -38,6 +46,7 @@
 
 <script>
 import { add } from 'date-fns'
+import snakeCase from 'lodash.snakecase'
 import db from '~/plugins/firestore'
 
 export default {
@@ -53,7 +62,8 @@ export default {
       ],
       cowStateEntered: null,
       dateOfRecentCalvingEntered: null,
-      wasSheInseminated: false
+      wasSheInseminated: false,
+      sheWasInseminatedOn: null
     }
   },
   computed: {
@@ -76,14 +86,15 @@ export default {
   },
   methods: {
     addCow() {
-      const newCow = this.newCow
+      const newCow = snakeCase(this.newCow)
       db.collection(`users/${this.$store.state.user.uid}/cows`)
         .doc(newCow)
         .set({
           name: this.newCow,
           state: this.cowStateEntered,
           dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
-          wasSheInseminated: this.wasSheInseminated
+          wasSheInseminated: this.wasSheInseminated,
+          sheWasInseminatedOn: this.sheWasInseminatedOn
         })
         .then(
           this.cowStateEntered === 'inseminated' ||

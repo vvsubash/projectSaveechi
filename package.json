@@ -14,7 +14,8 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "prettify": "npx prettier --write \"**/*.{vue,js}\"",
     "release": "standard-version",
-    "test": "jest"
+    "test": "jest",
+    "commit": "npx git-cz"
   },
   "lint-staged": {
     "*.{js,vue}": "yarn lint",
@@ -33,6 +34,7 @@
     "@nuxtjs/vuetify": "^1.11.2",
     "date-fns": "^2.14.0",
     "firebase": "^7.15.0",
+    "lodash.snakecase": "^4.1.1",
     "nuxt": "^2.0.0",
     "vuefire": "^2.2.2",
     "vuexfire": "^3.2.2"
