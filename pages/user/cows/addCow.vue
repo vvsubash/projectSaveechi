@@ -22,11 +22,18 @@
             ></v-select>
             <v-text-field
               v-show="
-                cowStateEntered == 'inseminated' || cowsStateEntered == 'dry'
+                cowStateEntered == 'inseminated' || cowStateEntered == 'dry'
               "
               v-model="sheWasInseminatedOn"
               type="date"
               label="She was inseminated on"
+            ></v-text-field>
+
+            <v-text-field
+              v-show="cowStateEntered == 'dry'"
+              v-model="driedOfOn"
+              type="date"
+              label="She was dried of on"
             ></v-text-field>
             <v-checkbox
               v-model="wasSheInseminated"
@@ -63,7 +70,8 @@ export default {
       cowStateEntered: null,
       dateOfRecentCalvingEntered: null,
       wasSheInseminated: false,
-      sheWasInseminatedOn: null
+      sheWasInseminatedOn: null,
+      driedOfOn: null
     }
   },
   computed: {
@@ -94,7 +102,8 @@ export default {
           state: this.cowStateEntered,
           dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
           wasSheInseminated: this.wasSheInseminated,
-          sheWasInseminatedOn: this.sheWasInseminatedOn
+          sheWasInseminatedOn: this.sheWasInseminatedOn,
+          driedOfOn: this.driedOfOn
         })
         .then(
           this.cowStateEntered === 'inseminated' ||

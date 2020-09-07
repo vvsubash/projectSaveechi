@@ -25,8 +25,8 @@
             <p>{{ cow.state }}</p>
           </v-flex>
           <v-flex xs6 sm4 md2>
-            <div class="caption grey--text">State</div>
-            <p>{{ cow.state }}</p>
+            <div class="caption grey--text">Delete</div>
+            <v-icon @click="deleteCow(cow.name)">mdi-delete</v-icon>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>
@@ -36,6 +36,9 @@
 </template>
 
 <script>
+import snakeCase from 'lodash.snakecase'
+import db from '~/plugins/firestore'
+
 export default {
   data() {
     return {
@@ -45,6 +48,19 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('cows/getCows')
+  },
+  methods: {
+    deleteCow(name) {
+      db.collection(`users/${this.$store.state.user.uid}/cows`)
+        .doc(snakeCase(name))
+        .delete()
+        .then(function() {
+          console.log('Document successfully deleted!')
+        })
+        .catch(function(error) {
+          console.error('Error removing document: ', error)
+        })
+    }
   },
   validate({ store }) {
     return store.state.user != null

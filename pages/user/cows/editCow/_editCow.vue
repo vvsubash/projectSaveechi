@@ -20,7 +20,6 @@
     <section v-else>
       <h2>There is some problem please contact support</h2>
     </section>
-    {{ cow }}
   </main>
 </template>
 

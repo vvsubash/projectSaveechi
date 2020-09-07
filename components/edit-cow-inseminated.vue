@@ -5,7 +5,7 @@
         `She calved on ${cow.dateOfRecentCalving} and inseminated on ${cow.sheWasInseminatedOn}`
       }}
     </h4>
-    <form @submit.prevent="updateCow">
+    <div>
       <input id="check1" v-model="check1" type="checkbox" name="check1" />
       <label for="check1">1st confirmation</label>
       <br />
@@ -19,13 +19,16 @@
       <label for="driedOf">Dried Of</label>
       <br />
       {{ driedOf }}
-      <input type="submit" @click="updateCow" />
-    </form>
+      <button @click="updateCow">Submit</button>
+    </div>
+    {{ cow }}
   </div>
 </template>
 
 <script>
+import snakeCase from 'lodash.snakecase'
 import db from '~/plugins/firestore'
+
 export default {
   props: {
     cow: {
@@ -46,15 +49,31 @@ export default {
   methods: {
     updateCow() {
       const uid = this.$store.state.user.uid
-      const name = this.$route.params.editCow
+      const name = snakeCase(this.$route.params.editCow)
+      // this.driedOf === true
+      //   ? db
+      //       .collection(`users/${uid}/cows`)
+      //       .doc(name)
+      //       .set(
+      //         {
+      //           stateis: 'dry',
+      //           driedOfOn: 'decpen'
+      //         },
+      //         { merge: true }
+      //       )
+      //   : console.log('hi')
+
       if (this.driedOf === true) {
         return db
           .collection(`users/${uid}/cows`)
           .doc(name)
-          .set({
-            state: 'dry',
-            driedOfOn: 'new Date()'
-          })
+          .set(
+            {
+              state: 'dry',
+              driedOfOn: 'new Date()'
+            },
+            { merge: true }
+          )
       } else {
         return db
           .collection(`users/${uid}/cows`)
