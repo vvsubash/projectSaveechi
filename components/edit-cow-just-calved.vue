@@ -5,54 +5,44 @@
         `She calved on ${cow.dateOfRecentCalving} and can be inseminated on need to fix on logic`
       }}
     </h4>
-    <form @submit="updateCow">
-      <label for="eventToBeRecorded">Event To be recorded</label>
-
-      <input
-        id="recordHeyarn devat"
-        v-model="eventToBeRecorded"
-        type="radio"
-        name="eventToBeRecorded"
-        value="recordHeat"
-      />
-      <label for="recordHeat">Record Heat</label>
-      <br />
-      <input
-        id="inseminated"
-        v-model="eventToBeRecorded"
-        type="radio"
-        name="eventToBeRecorded"
-        value="inseminated"
-      />
-      <label for="inseminated">Inseminated</label>
-      <br />
-
-      <section v-if="eventToBeRecorded == 'recordHeat'">
-        <label for>Observed Heat</label>
-        <input
-          v-model="dateOfObservedHeat"
-          type="date"
-          name="dateOfObservedHeat"
-        />
-        <input type="submit" />
-      </section>
-      <section v-if="eventToBeRecorded == 'inseminated'">
-        <label for="dateOfInsemination">Date Of Insemination</label>
-        <input
-          v-model="dateOfInsemination"
-          type="date"
-          name="dateOfInsemination"
-        />
-        <label for="semenIdNumber">Semen Id Number</label>
-        <input v-model="semenIdNumber" type="text" name="dateOfObservedHeat" />
-        <input type="submit" />
-      </section>
-    </form>
+    <v-form data-app>
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="4">
+            <v-select
+              v-model="eventToBeRecorded"
+              :items="eventsThatCanBeRecorded"
+              label="Event to be recorded"
+              required
+            ></v-select>
+            <v-text-field
+              v-show="eventToBeRecorded == 'recordHeat'"
+              v-model="dateOfObservedHeat"
+              type="date"
+              label="Date of observed heat"
+            ></v-text-field>
+            <v-text-field
+              v-show="eventToBeRecorded == 'inseminated'"
+              v-model="dateOfInsemination"
+              type="date"
+              label="Date of Insemination"
+            ></v-text-field>
+            <v-text-field
+              v-show="eventToBeRecorded == 'inseminated'"
+              v-model="semenIdNumber"
+              label="Semen Id Number"
+            ></v-text-field>
+            <v-btn outlined large @click="updateCow">Add Cow</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase/app'
+import snakeCase from 'lodash.snakecase'
 import db from '~/plugins/firestore'
 import 'firebase/firestore'
 export default {
@@ -67,6 +57,7 @@ export default {
   data() {
     return {
       eventToBeRecorded: 'recordHeat',
+      eventsThatCanBeRecorded: ['recordHeat', 'inseminated'],
       dateOfObservedHeat: null,
       dateOfInsemination: null,
       semenIdNumber: null
@@ -75,7 +66,7 @@ export default {
   methods: {
     updateCow() {
       const uid = this.$store.state.user.uid
-      const name = this.$route.params.editCow
+      const name = snakeCase(this.$route.params.editCow)
       if (this.eventToBeRecorded === 'recordHeat') {
         return db
           .collection(`users/${uid}/cows`)
@@ -92,14 +83,16 @@ export default {
         return db
           .collection(`users/${uid}/cows`)
           .doc(name)
-          .set({
-            name: this.cow.name,
-            dateOfRecentCalving: this.cow.dateOfRecentCalving,
-            state: 'inseminated',
-            sheWasInseminatedOn: new Date(this.dateOfInsemination),
-            semenId: this.semenIdNumber,
-            isSheMilking: true
-          })
+          .set(
+            {
+              dateOfRecentCalving: this.cow.dateOfRecentCalving,
+              state: 'inseminated',
+              sheWasInseminatedOn: new Date(this.dateOfInsemination),
+              semenId: this.semenIdNumber,
+              isSheMilking: true
+            },
+            { merge: true }
+          )
       }
     }
   }
