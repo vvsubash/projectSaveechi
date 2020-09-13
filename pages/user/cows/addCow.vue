@@ -102,8 +102,8 @@ export default {
           state: this.cowStateEntered,
           dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
           wasSheInseminated: this.wasSheInseminated,
-          sheWasInseminatedOn: this.sheWasInseminatedOn,
-          driedOfOn: this.driedOfOn
+          sheWasInseminatedOn: new Date(this.sheWasInseminatedOn),
+          driedOfOn: new Date(this.driedOfOn)
         })
         .then(
           this.cowStateEntered === 'inseminated' ||
