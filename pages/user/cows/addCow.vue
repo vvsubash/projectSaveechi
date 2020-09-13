@@ -61,12 +61,7 @@ export default {
     return {
       newCow: null,
       cowType: null,
-      possibleCowStates: [
-        'justCalved',
-        'canBeInseminated',
-        'inseminated',
-        'dry'
-      ],
+      possibleCowStates: ['justCalved', 'inseminated', 'dry'],
       cowStateEntered: null,
       dateOfRecentCalvingEntered: null,
       wasSheInseminated: false,
@@ -95,22 +90,63 @@ export default {
   methods: {
     addCow() {
       const newCow = snakeCase(this.newCow)
-      db.collection(`users/${this.$store.state.user.uid}/cows`)
-        .doc(newCow)
-        .set({
-          name: this.newCow,
-          state: this.cowStateEntered,
-          dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
-          wasSheInseminated: this.wasSheInseminated,
-          sheWasInseminatedOn: new Date(this.sheWasInseminatedOn),
-          driedOfOn: new Date(this.driedOfOn)
-        })
-        .then(
-          this.cowStateEntered === 'inseminated' ||
-            this.cowStateEntered === 'dry'
-            ? this.$router.push(`/user/cows/editcow/${this.newCow}`)
-            : this.$router.push('/user')
-        )
+      switch (this.cowStateEntered) {
+        case 'justCalved':
+          db.collection(`users/${this.$store.state.user.uid}/cows`)
+            .doc(newCow)
+            .set({
+              name: this.newCow,
+              state: this.cowStateEntered,
+              dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered)
+            })
+            .then(this.$router.push(`/user/cows/editcow/${this.newCow}`))
+          break
+        case 'inseminated':
+          db.collection(`users/${this.$store.state.user.uid}/cows`)
+            .doc(newCow)
+            .set({
+              name: this.newCow,
+              state: this.cowStateEntered,
+              dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
+              sheWasInseminatedOn: new Date(this.sheWasInseminatedOn),
+              check1: {
+                isCompleted: false,
+                isPassed: false,
+                date: add(new Date(this.sheWasInseminatedOn), {
+                  days: 18
+                })
+              },
+              check2: {
+                isCompleted: false,
+                isPassed: false,
+                date: add(new Date(this.sheWasInseminatedOn), {
+                  days: 90
+                })
+              },
+              shouldBeDriedOn: add(new Date(this.sheWasInseminatedOn), {
+                days: 185
+              }),
+              expectedDateOfCalving: add(new Date(this.sheWasInseminatedOn), {
+                days: 283
+              })
+            })
+            .then(this.$router.push(`/user/cows/editcow/${this.newCow}`))
+          break
+        case 'dry':
+          db.collection(`users/${this.$store.state.user.uid}/cows`)
+            .doc(newCow)
+            .set({
+              name: this.newCow,
+              state: this.cowStateEntered,
+              dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered),
+              sheWasInseminatedOn: new Date(this.sheWasInseminatedOn),
+              driedOfOn: new Date(this.driedOfOn),
+              expectedDateOfCalving: add(new Date(this.sheWasInseminatedOn), {
+                days: 283
+              })
+            })
+            .then(this.$router.push(`/user/cows/editcow/${this.newCow}`))
+      }
     }
   },
   validate({ store }) {
