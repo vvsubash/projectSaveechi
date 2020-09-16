@@ -53,12 +53,12 @@ export default {
     // '@nuxtjs/dotenv'
   ],
   generate: {
-    fallback: true,
-    exclude: [
-      /^\/user/ // path starts with /admin
-    ]
+    fallback: true
+    // exclude: [
+    //   /^\/user/ // path starts with /admin
+    // ]
   },
-  /*
+  //*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
