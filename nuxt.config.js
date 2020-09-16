@@ -53,6 +53,7 @@ export default {
     // '@nuxtjs/dotenv'
   ],
   generate: {
+    fallback: true,
     exclude: [
       /^\/user/ // path starts with /admin
     ]
