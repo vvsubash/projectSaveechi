@@ -45,24 +45,13 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa'
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    // '@nuxtjs/dotenv'
-  ],
+  modules: ['@nuxtjs/pwa'],
   generate: {
     fallback: true
     // exclude: [
     //   /^\/user/ // path starts with /admin
     // ]
   },
-  //*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
   /*
    ** Build configuration
    */
