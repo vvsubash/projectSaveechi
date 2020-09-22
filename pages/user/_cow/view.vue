@@ -1,9 +1,7 @@
 <template>
   <main>
     <h1>
-      <nuxt-link :to="'/user/cows/editcow/' + cow.name">{{
-        cow.name
-      }}</nuxt-link>
+      <nuxt-link :to="`/user/${cow.name}/edit`">{{ cow.name }}</nuxt-link>
     </h1>
     <section>
       <h3>{{ cow.state }}</h3>
@@ -54,8 +52,8 @@ export default {
         : '0'
     },
     cow() {
-      return this.$store.state.cows.cows.find((x) => {
-        return x.name === this.$route.params.viewCow
+      return this.$store.state.cows.cowsList.find((x) => {
+        return x.name === this.$route.params.cow
       })
     }
   }

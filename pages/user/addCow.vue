@@ -99,7 +99,7 @@ export default {
               state: this.cowStateEntered,
               dateOfRecentCalving: new Date(this.dateOfRecentCalvingEntered)
             })
-            .then(this.$router.push(`/user/cows/editcow/${this.newCow}`))
+            .then(this.$router.push(`/user/${this.newCow}/edit`))
           break
         case 'inseminated':
           db.collection(`users/${this.$store.state.user.uid}/cows`)
@@ -130,7 +130,7 @@ export default {
                 days: 283
               })
             })
-            .then(this.$router.push(`/user/cows/editcow/${this.newCow}`))
+            .then(this.$router.push(`/user/${this.newCow}/edit`))
           break
         case 'dry':
           db.collection(`users/${this.$store.state.user.uid}/cows`)
@@ -145,7 +145,7 @@ export default {
                 days: 283
               })
             })
-            .then(this.$router.push(`/user/cows/editcow/${this.newCow}`))
+            .then(this.$router.push(`/user/${this.newCow}/edit`))
       }
     }
   },

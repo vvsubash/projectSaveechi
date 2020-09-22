@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import * as firebase from 'firebase/app'
 import 'firebase/firestore'
-import { firestoreAction } from 'vuexfire'
+import { vuexfireMutations, firestoreAction } from 'vuexfire'
 export const state = () => ({
   cows: []
 })
@@ -12,12 +12,14 @@ export const getters = {
   }
 }
 
-export const mutations = {}
+export const mutations = {
+  ...vuexfireMutations
+}
 
 export const actions = {
   getCows: firestoreAction(({ rootState, bindFirestoreRef }) => {
     bindFirestoreRef(
-      'cows',
+      'cowsList',
       firebase.firestore().collection(`users/${rootState.user.uid}/cows`)
     )
   })

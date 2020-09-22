@@ -1,7 +1,7 @@
 <template>
   <v-app class="dashboard">
     <h1>Hi {{ uid }}</h1>
-    <nuxt-link to="/user/cows/addcow">Add Cows</nuxt-link>
+    <nuxt-link to="/user/addcow">Add Cows</nuxt-link>
     <!-- <ul v-for="cow in cows" :key="cow.name">
       <li>
         <nuxt-link :to="'/user/cows/' + cow.name">{{ cow.name }}</nuxt-link>
@@ -12,7 +12,7 @@
         <v-layout row wrap class="pa-3">
           <v-flex xs12 md6>
             <div class="caption grey--text">Name</div>
-            <nuxt-link :to="'/user/cows/editcow/' + cow.name"
+            <nuxt-link :to="`/user/${cow.name}/edit`"
               >{{ cow.name }}
             </nuxt-link>
           </v-flex>
@@ -42,7 +42,7 @@ import db from '~/plugins/firestore'
 export default {
   data() {
     return {
-      cows: this.$store.state.cows.cows,
+      cows: this.$store.state.cows.cowsList,
       uid: this.$store.state.user.uid
     }
   },
