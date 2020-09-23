@@ -49,7 +49,7 @@ export default {
   methods: {
     updateCow() {
       const uid = this.$store.state.user.uid
-      const name = snakeCase(this.$route.params.editCow)
+      const name = snakeCase(this.$route.params.cow)
       // this.driedOf === true
       //   ? db
       //       .collection(`users/${uid}/cows`)

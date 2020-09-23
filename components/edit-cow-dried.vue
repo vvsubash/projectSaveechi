@@ -52,7 +52,7 @@ export default {
   methods: {
     updateCow() {
       const uid = this.$store.state.user.uid
-      const name = this.$route.params.editCow
+      const name = this.$route.fretrsg.cow
       if (this.justCalved === true) {
         return db
           .collection(`users/${uid}/cows`)

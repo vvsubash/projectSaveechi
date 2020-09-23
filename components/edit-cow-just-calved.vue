@@ -66,34 +66,32 @@ export default {
   methods: {
     updateCow() {
       const uid = this.$store.state.user.uid
-      const name = snakeCase(this.$route.params.editCow)
-      if (this.eventToBeRecorded === 'recordHeat') {
-        return db
-          .collection(`users/${uid}/cows`)
-          .doc(name)
-          .set(
-            {
-              dateOfObservedHeat: firebase.firestore.FieldValue.arrayUnion(
-                new Date(this.dateOfObservedHeat)
-              )
-            },
-            { merge: true }
-          )
-      } else {
-        return db
-          .collection(`users/${uid}/cows`)
-          .doc(name)
-          .set(
-            {
-              dateOfRecentCalving: this.cow.dateOfRecentCalving,
-              state: 'inseminated',
-              sheWasInseminatedOn: new Date(this.dateOfInsemination),
-              semenId: this.semenIdNumber,
-              isSheMilking: true
-            },
-            { merge: true }
-          )
-      }
+      const name = snakeCase(this.$route.params.cow)
+      this.eventToBeRecorded === 'recordHeat'
+        ? db
+            .collection(`users/${uid}/cows`)
+            .doc(name)
+            .set(
+              {
+                dateOfObservedHeat: firebase.firestore.FieldValue.arrayUnion(
+                  new Date(this.dateOfObservedHeat)
+                )
+              },
+              { merge: true }
+            )
+        : db
+            .collection(`users/${uid}/cows`)
+            .doc(name)
+            .set(
+              {
+                dateOfRecentCalving: this.cow.dateOfRecentCalving,
+                state: 'inseminated',
+                sheWasInseminatedOn: new Date(this.dateOfInsemination),
+                semenId: this.semenIdNumber,
+                isSheMilking: true
+              },
+              { merge: true }
+            )
     }
   }
 }
